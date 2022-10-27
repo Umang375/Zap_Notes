@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+// const { Schema } = mongoose;
 // const validator = require('validator');
 // const bcrypt = require('bcryptjs');
 // const jwt = require('jsonwebtoken');
@@ -25,12 +26,12 @@ const UserSchema = new mongoose.Schema({
     phone: {
         type: Number,
         min: 10,
-        required: true,
+        // required: true,
         unique: true
     },
     work: {
         type: String,
-        required: true
+        // required: true
     },  
     password: {
         type: String,
@@ -38,7 +39,7 @@ const UserSchema = new mongoose.Schema({
     },
     cpassword: {
         type: String,
-        required: true
+        // required: true
     }
 })
 

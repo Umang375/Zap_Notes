@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoURI = 'mongodb://localhost:27017/note_taking_util';
+const mongoURI = `mongodb://localhost:27017/Zap_Notes_user`;  
 
 const connectToMongo = () => {
     mongoose.connect(mongoURI, () => {
