@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// const { Schema } = mongoose;
 // const validator = require('validator');
 // const bcrypt = require('bcryptjs');
 // const jwt = require('jsonwebtoken');
@@ -23,24 +22,12 @@ const UserSchema = new mongoose.Schema({
         //     }
         // }
     },
-    phone: {
-        type: Number,
-        min: 10,
-        // required: true,
-        unique: true
-    },
-    work: {
-        type: String,
-        // required: true
-    },  
     password: {
-        type: String,
-        required: true
-    },
-    cpassword: {
         type: String,
         // required: true
     }
 })
 
-module.exports = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
+User.createIndexes();
+module.exports = User; 
