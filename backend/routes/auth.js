@@ -4,6 +4,7 @@ const User = require('../models/User');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+var fetchUser = require('../middleware/fetchUser');
 
 //get string from.env and use it as jwt secret key
 const key = process.env.SECRET_KEY;
@@ -94,4 +95,15 @@ router.post('/login' ,[
 
 })
 
+// ROUTE 3: get logged in user using: POST "/api/auth/getuser".login required
+router.post('/getuser', fetchUser, async (req, res) => {
+  try{
+    const userId = req.user.id;
+    const user = await User.findById(userId).select("-password");
+    res.send(user);
+  }catch(error){
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+})
 module.exports = router;
