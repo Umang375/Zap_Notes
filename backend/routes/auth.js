@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 var fetchUser = require('../middleware/fetchUser');
 
 //get string from.env and use it as jwt secret key
-const key = process.env.SECRET_KEY;
+const key = "privaekey";
 
 // const fetchuser = require('../middleware/fetchuser'); 
 
