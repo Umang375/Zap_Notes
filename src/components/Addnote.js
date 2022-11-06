@@ -65,7 +65,7 @@ export const Addnote = () => {
             className="btn btn-primary"
             onClick={handleClick}
           >
-            Submit
+            ADD NOTE
           </button>
         </form>
       </div>
