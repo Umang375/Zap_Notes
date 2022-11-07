@@ -1,4 +1,6 @@
 const connectToMongo = require('./db');
+var cors = require('cors');
+
 
 connectToMongo();
 
@@ -8,6 +10,7 @@ const port = 5000
 const dotenv = require("dotenv")
 dotenv.config()
 
+app.use(cors());
 app.use(express.json());
 
 //Available for all routes

@@ -3,69 +3,38 @@ import { useState } from "react";
 import NoteContext from "./noteContext";
 
 const NoteState = (props) => {
-  const notesInital = [
-
-    {
-      "_id": "6363eeg2dd369c931e47e98d6",
-      "user": "635c38ec55cd5c2420f33322",
-      "title": "hd updation tv",
-      "description": "all (this too updated have hd tv",
-      "tag": "hdd",
-      "date": "2022-11-03T16:37:01.240Z",
-      "__v": 0
-    },
-    {
-      "_id": "63668e2t4257880f6d64d27c",
-      "user": "635c38ec55cd5c2420f33322",
-      "title": "hd tv",
-      "description": "all  ghfghf ghfh have hd tv",
-      "tag": "hdd",
-      "date": "2022-11-05T16:24:12.870Z",
-      "__v": 0
-    },
-    {
-      "_id": "63668e2f4s257880f6d64d27e",
-      "user": "635c38ec55cd5c2420f33322",
-      "title": "hd kl hjghj tv",
-      "description": "all  ghfghf ghfh have hd tv",
-      "tag": "hdd",
-      "date": "2022-11-05T16:24:15.500Z",
-      "__v": 0
-    },
-    {
-      "_id": "63668e2f425a7880f6d64d280",
-      "user": "635c38ec55cd5c2420f33322",
-      "title": "hd kl hjghj tv",
-      "description": "all  ghfghf ghfh have hd tv",
-      "tag": "hdd",
-      "date": "2022-11-05T16:24:15.879Z",
-      "__v": 0
-    },
-    {
-      "_id": "63668e30425h7880f6d64d282",
-      "user": "635c38ec55cd5c2420f33322",
-      "title": "hd kl hjghj tv",
-      "description": "all  ghfghf ghfh have hd tv",
-      "tag": "hdd",
-      "date": "2022-11-05T16:24:16.421Z",
-      "__v": 0
-    },
-    {
-      "_id": "63668e47b4257880f6d64d284",
-      "user": "635c38ec55cd5c2420f33322",
-      "title": "hd kl hjghj tv",
-      "description": "all  ghfghf ghfh have hd tv",
-      "tag": "hdd",
-      "date": "2022-11-05T16:24:39.838Z",
-      "__v": 0
-    }
-
-  ]
+  const host = "http://localhost:5000";
+  const notesInital = [];
 
   const [notes, setNotes] = useState(notesInital);
+  
+  //GET NOTES
+  const getNotes = async()=>{
+    const response  = await fetch(`${host}/api/notes/fetchallnotes`,{
+      method: "GET",
+      headers:{
+        "Content-Type": "application/json",
+        // "auth-token": localStorage.getItem("token")
+        "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM1YzM4ZWM1NWNkNWMyNDIwZjMzMzIyIn0sImlhdCI6MTY2NzY2NTA4OH0.CHtWA7y7RUpD9Zs_r7nZrB-Z5d7ZY6WflrHQ5qjpXUg"
+      }
+    });
+    const json = await response.json();
+    console.log(json);
+    setNotes(json);
+  }
 
   // Add a note
-  const addNote = (title, description, tag)=>{
+  const addNote = async (title, description, tag)=>{
+    const response = await fetch(`${host}/api/notes/addnote`,
+    {
+      method: 'POST',
+      headers:{
+        "Content-Type": "application/json",
+        // "auth-token": localStorage.getItem("token")
+        "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM1YzM4ZWM1NWNkNWMyNDIwZjMzMzIyIn0sImlhdCI6MTY2NzY2NTA4OH0.CHtWA7y7RUpD9Zs_r7nZrB-Z5d7ZY6WflrHQ5qjpXUg"
+      },
+      body: JSON.stringify({title, description, tag})
+    });
     console.log("Adding a note");
     let note = {
       "_id": "63668e47b425880f6d64d284",
@@ -89,12 +58,30 @@ const NoteState = (props) => {
   }
 
   // Edit a note
-  const editNote = ()=>{
-
+  const editNote = async (id, title, description, tag)=>{
+    console.log("Editing a note");
+    const response = await fetch(`${host}/api/notes/updatenote/${id}`,
+    {
+      method: 'PUT',
+      headers:{
+        "Content-Type": "application/json",
+        // "auth-token": localStorage.getItem("token")
+      },
+      body: JSON.stringify({title, description, tag})
+    });
+    const json =  response.json();
+    for (let index = 0; index < notes.length; index++) {
+      const element = notes[index];
+      if(element._id === id){
+        element.title = title;
+        element.description = description;
+        element.tag = tag;
+      }
+    }
   }
 
   return (
-    <NoteContext.Provider value={{ notes, addNote, deleteNote,editNote }}>
+    <NoteContext.Provider value={{ notes, addNote, deleteNote,editNote, getNotes}}>
       {props.children}
     </NoteContext.Provider>
   )
