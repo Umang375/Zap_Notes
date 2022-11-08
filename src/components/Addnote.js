@@ -14,13 +14,7 @@ export const Addnote = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    // Add a note
     addNote(note.title, note.description, note.tag);
-    // setNote({
-    //   title: "",
-    //   description: "",
-    //   tag: "general",
-    // });
   };
 
   const onChange = (e) => {
@@ -50,13 +44,25 @@ export const Addnote = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="description" className="form-label">
-              description
+              Description
             </label>
             <input
               type="text"
               className="form-control"
               id="description"
               name="description"
+              onChange={onChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="tag" className="form-label">
+              Tags
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="tag"
+              name="tag"
               onChange={onChange}
             />
           </div>
