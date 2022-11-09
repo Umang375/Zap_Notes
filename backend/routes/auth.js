@@ -63,6 +63,7 @@ router.post('/login' ,[
   // body('password', 'Password must be atleast 5 characters').isLength({ min: 5 })
 
 ], async (req, res) => {
+  let success = false;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -75,7 +76,7 @@ router.post('/login' ,[
     }
     const passCompare = await bcrypt.compare(password, user.password);
     if(!passCompare){
-      return res.status(400).json({error: "Please try to login with correct credentials"});
+      return res.status(400).json({success, error: "Please try to login with correct credentials"});
     }
 
     const data = {
@@ -83,9 +84,9 @@ router.post('/login' ,[
         id: user.id
       }
     }
-
+    success = true;
     const authToken = jwt.sign(data, key);
-    res.json({authToken})
+    res.json({success, authToken})
 
   }catch(error){
     console.error(error.message);
