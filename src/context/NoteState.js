@@ -14,8 +14,7 @@ const NoteState = (props) => {
       method: "GET",
       headers:{
         "Content-Type": "application/json",
-        // "auth-token": localStorage.getItem("token")
-        "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM1YzM4ZWM1NWNkNWMyNDIwZjMzMzIyIn0sImlhdCI6MTY2NzkxMjYyMn0.uM9TdwW1L-eY2rT6wifETuLDKlHoFqbPPz7zHcfXAa4"
+        "auth-token": localStorage.getItem("token")
       }
     });
     const json = await response.json();
@@ -30,8 +29,7 @@ const NoteState = (props) => {
       method: 'POST',
       headers:{
         "Content-Type": "application/json",
-        // "auth-token": localStorage.getItem("token")
-        "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM1YzM4ZWM1NWNkNWMyNDIwZjMzMzIyIn0sImlhdCI6MTY2NzkxMjYyMn0.uM9TdwW1L-eY2rT6wifETuLDKlHoFqbPPz7zHcfXAa4"
+        "auth-token": localStorage.getItem("token")
       },
       body: JSON.stringify({title, description, tag})
     });
@@ -47,11 +45,11 @@ const NoteState = (props) => {
       method: 'DELETE',
       headers:{
         "Content-Type": "application/json",
-        // "auth-token": localStorage.getItem("token")
-        "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM1YzM4ZWM1NWNkNWMyNDIwZjMzMzIyIn0sImlhdCI6MTY2NzkxMjYyMn0.uM9TdwW1L-eY2rT6wifETuLDKlHoFqbPPz7zHcfXAa4"
+        "auth-token": localStorage.getItem("token")
       }
     });
     const json = await response.json();
+    console.log(json);
     
     const newNotes = notes.filter((note)=>{
       return note._id !== id;
@@ -67,8 +65,7 @@ const NoteState = (props) => {
       method: 'PUT',
       headers:{
         "Content-Type": "application/json",
-        // "auth-token": localStorage.getItem("token")
-        "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM1YzM4ZWM1NWNkNWMyNDIwZjMzMzIyIn0sImlhdCI6MTY2NzkxMjYyMn0.uM9TdwW1L-eY2rT6wifETuLDKlHoFqbPPz7zHcfXAa4"
+        "auth-token": localStorage.getItem("token")
       },
       body: JSON.stringify({title, description, tag})
     });

@@ -30,7 +30,7 @@ function App() {
         <Routes>
           <Route path="/home" element={<Home showAlert = {showAlert}/>} />
           <Route path="/about" element={<About />} />
-          <Route path="/" element={<Home />} />
+          {/* <Route path="/" element={<Home showAlert = {showAlert}/>} /> */}
           <Route path="/login" element={<Login showAlert = {showAlert} />} />
           <Route path="/signup" element={<Signup showAlert = {showAlert} />} />
         </Routes>
