@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 
 import noteContext from "../context/noteContext";
 
-export const Addnote = () => {
+export const Addnote = (props) => {
   const context = useContext(noteContext);
   const { addNote } = context;
   const [note, setNote] = useState({
@@ -19,16 +19,18 @@ export const Addnote = () => {
       title: "",
       description: "",
       tag: ""
-    })
+    });
+    props.showAlert("Note added successfully", "success");
   };
 
   const onChange = (e) => {
     setNote({...note, [e.target.name]: e.target.value})
-  };
+  }
 
   return (
     <div>
       <div className="container my-3">
+        
         <h2>Add a Note</h2>
         <form>
           <div className="mb-3">

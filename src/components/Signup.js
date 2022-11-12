@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Signup = () => {
+const Signup = (props) => {
   const [credentials, setCredentials] = useState({ name: "", email: "", password: "", cpassword: "" });
   
   // const [password, setPassword] = useState("");
@@ -32,8 +32,9 @@ const Signup = () => {
     if (json.authToken) {
       localStorage.setItem("token", json.authToken);
       navigate("/");
+      props.showAlert("Account created successfully", "success");
     } else {
-      alert("Invalid Credentials");
+      props.showAlert("Invalid Credentials", "danger");
     }
   };
 
